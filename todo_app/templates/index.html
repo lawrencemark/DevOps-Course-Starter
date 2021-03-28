@@ -5,13 +5,21 @@
   <div class="jumbotron">
     <h1 class="display-4">To-Do App</h1>
     <p class="lead">Just another to-do app.</p>
+    <form action = "http://localhost:5000" method = "post">
+                <p>Add to your To Do list:</p>
+                <p><input type = "text" name = "addTo" /></p>
+                <p><input type = "submit" value = "Add To List" /></p>
+    </form>
+
   </div>
 
   <div class="row">
     <div class="col-md-12">
       <h2>Items</h2>
       <ul class="list-group mb-4">
-        <!-- List the todo items here -->
+        {% for items in lstToDo %} 
+        <li>{{ items }}</a></li> 
+      {% endfor %} 
       </ul>
     </div>
   </div>
