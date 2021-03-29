@@ -5,7 +5,8 @@
   <div class="jumbotron">
     <h1 class="display-4">To-Do App</h1>
     <p class="lead">Just another to-do app.</p>
-    <form action = "http://localhost:5000" method = "post">
+    <form action = {{ url_for('index') }} method = "post">
+
                 <p>Add to your To Do list:</p>
                 <p><input type = "text" name = "addTo" /></p>
                 <p><input type = "submit" value = "Add To List" /></p>
@@ -18,7 +19,7 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
         {% for items in lstToDo %} 
-        <li>{{ items }}</a></li> 
+        <li>{{ items.title }}</a></li> 
       {% endfor %} 
       </ul>
     </div>

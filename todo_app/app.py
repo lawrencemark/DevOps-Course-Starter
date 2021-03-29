@@ -12,11 +12,8 @@ def index():
         itemAdded = request.form['addTo']
         add_item(itemAdded)
         return render_template('index.html', lstToDo = get_items())
-        
-
-
     else:
-        return render_template('index.html')
+        return render_template('index.html', lstToDo = get_items()) 
 
 
 if __name__ == '__main__':
