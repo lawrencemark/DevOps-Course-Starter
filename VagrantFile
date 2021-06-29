@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+config.vm.box = "hashicorp/bionic64"
+config.vm.network "forwarded_port", guest: 5000, host: 8080
+
+
+config.vm.provision "shell", inline: "apt-get update"
+config.vm.provision "shell", inline: "apt-get install -y build-essential"
+config.vm.provision :shell, :path => 'provision.sh', :privileged => false
+
+
+config.trigger.after :up do |trigger|
+  trigger.run_remote = {privileged: false, inline: "/home/vagrant/webapps/todo_app/startapp.sh"}
+  trigger.name = "The Box is now ready!"
+  trigger.info = "Hurray! Head over to your bound ip-address on port 8080. You'll find the worst Flask TO-DO application you've ever seen."
+end
+
+end
