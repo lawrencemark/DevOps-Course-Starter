@@ -1,21 +1,58 @@
-from flask import Flask, redirect, render_template, request, session, abort, url_for
+from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
 from markupsafe import escape
 import json, requests
+import os
 from werkzeug import utils
+import requests, json
 from .utils.classfunct import *
+
+token = os.getenv('token')
+key = os.getenv('key')
+
+BOARD_ID = 'Is89akxj'
+DONE_LISTID = '6088484a9c2e634057303f6c'
+TODO_LISTID = '6088484a9c2e634057303f6a'
+DOING_LISTID = '6088484a9c2e634057303f6b'
+
 
 app = Flask(__name__)
 
-taskclassrunner = card_tasks
+
+taskclass = card_tasks()
+
 
 @app.route("/")
 def index():
-    taskclassrunner.get_cardsonlist(TODO_LISTID)
-    return render_template('index.html',title='To Do List', myobjects=cardslist)
+    taskclass.get_cardsonlist(TODO_LISTID)
+    #return render_template('index.html',title='To Do List', myobjects=cardslist,someobjects=sortedbycardslist)
+    view = ViewModel.get_sortedcards()
+    return render_template('index.html',title='To Do List', myobjects=view,someobjects=cardslist)
 
 @app.route("/completed/<cardid>")
 def completed(cardid):
-    if (taskclassrunner.update_card(cardid, DONE_LISTID)) == "200":
+    if (taskclass.update_card(cardid, DONE_LISTID)) == "200":
+        return redirect(url_for('index'))
+    else:
+        return 'Ouch - something went wrong'
+
+@app.route('/sortby', methods = ['POST'])
+def set_sorybyvalue():
+    if request.method == 'POST':
+        sortedvalue = request.form['sortby']
+        taskclass.set_sortby(sortedvalue)
+        ViewModel.set_sortcards(sortedvalue)
+        return redirect(url_for('index'))
+      
+@app.route("/doing/<cardid>")
+def doing(cardid):
+    if (taskclass.update_card(cardid, DOING_LISTID)) == "200":
+        return redirect(url_for('index'))
+    else:
+        return 'Ouch - something went wrong'
+
+@app.route("/delete/<cardid>")
+def delete(cardid):
+    if (taskclass.del_card(cardid)) == "200":
         return redirect(url_for('index'))
     else:
         return 'Ouch - something went wrong'
@@ -25,7 +62,7 @@ def postRequest():
     if request.method == 'POST':
         itemAdded = request.form['addTo']
         taskdescription = request.form['description']
-        taskclassrunner.addcard_todo(itemAdded,taskdescription)
+        taskclass.addcard_todo(itemAdded,taskdescription)
         return redirect(url_for('index'))
     else:
         return "Something went wrong!"
