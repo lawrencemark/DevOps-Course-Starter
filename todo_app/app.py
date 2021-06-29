@@ -1,24 +1,35 @@
-from flask import Flask, render_template, request, url_for, redirect
-from todo_app.data.session_items import *
-from todo_app.flask_config import Config
+from flask import Flask, redirect, render_template, request, session, abort, url_for
+from markupsafe import escape
+import json, requests
+from werkzeug import utils
+from .utils.classfunct import *
 
 app = Flask(__name__)
-app.config.from_object(Config)
 
+taskclassrunner = card_tasks
 
-@app.route('/', methods = ['POST'])
+@app.route("/")
+def index():
+    taskclassrunner.get_cardsonlist(TODO_LISTID)
+    return render_template('index.html',title='To Do List', myobjects=cardslist)
+
+@app.route("/completed/<cardid>")
+def completed(cardid):
+    if (taskclassrunner.update_card(cardid, DONE_LISTID)) == "200":
+        return redirect(url_for('index'))
+    else:
+        return 'Ouch - something went wrong'
+    
+@app.route('/addtask', methods = ['POST'])
 def postRequest():
     if request.method == 'POST':
         itemAdded = request.form['addTo']
-        add_item(itemAdded)
+        taskdescription = request.form['description']
+        taskclassrunner.addcard_todo(itemAdded,taskdescription)
         return redirect(url_for('index'))
     else:
         return "Something went wrong!"
 
-@app.route('/', methods = ['GET'])
-def index():
-    return render_template('index.html', lstToDo = get_items()) 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
