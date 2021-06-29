@@ -4,7 +4,7 @@ import json, requests
 import os
 from werkzeug import utils
 import requests, json
-from utils.classfunct import *
+from .utils.classfunct import *
 
 token = os.getenv('token')
 key = os.getenv('key')
