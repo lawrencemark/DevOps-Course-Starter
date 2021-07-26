@@ -2,15 +2,15 @@ Welcome to Module 5
 ===================
 
 Please find the build and run instructions for Module 5 of the DevOps Course. The below contains the 
-details to run the containers after they have been built using the ./build.sh script - being the preferred method - to 
-aid the developer and for me when I forget: in about a days time!
+details to run the containers after they have been built using the ./build.sh script - is the preferred method - to 
+aid the developer and for me when I forget: in about a day!
  
 The development build script will pull the latest git controlled version of the todo application from github for this 
 release only - this is a requirement for using directory binding; and local development as part of the set exercise - 
 volumes could have been used instead. The docker build process and associated scripts used by the production release 
 takes care of this and is part of the imaging script.
 
-The most import thing to take into account is for the production release and its run arguments take into consideration 
+The most important thing to take into account is for the production release and its run arguments take into consideration 
 that a .env environment file is present within the directory the command is executed from, and set with the appropriate 
 token and Trello key:
 
