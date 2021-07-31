@@ -56,6 +56,42 @@ You should see output similar to the following:
  * Debugger is active!
  * Debugger PIN: 226-556-590
 ```
-Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app
+Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Docker Production and Development Images
+
+Please clone the relevant github application as appropriate:
+
+example: git clone https://github.com/lawrencemark/DevOps-Course-Starter
+
+To keep secrets, keys and tokens secure please create a .env file within the directory that you launch the 'docker run' command from to be succesful in making rest calls to Trello:
+
+key=yourtrellokeygoeshere
+token=yourtrellotokengoeshere
+
+To build the relevant production and development image please use the following docker commands:
+
+PRODUCTION BUILD
+================
+
+docker build . -t todo-app:prod --target=production
+
+DEVELOPMENT BUILD
+=================
+
+docker build . -t todo-app:dev --target=development
+
+To execute and load the container with the correct parameters please use those below:
+
+PRODUCTION RUN
+==============
+
+docker run -d -p 5000:5000 --env-file .env todo-app:prod
+
+DEVELOPMENT RUN
+===============
+
+docker run -it -p 5000:5000 --env-file .env --mount type=bind,source=$(pwd),target=/srv/www/todo-app todo-app:dev 
+
 
 
