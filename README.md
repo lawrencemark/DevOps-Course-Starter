@@ -39,6 +39,12 @@ You'll also need to update your board and list-id values within the './to_app/ut
 More information regarding the rest APIs used within this application can be found at: https://developer.atlassian.com/cloud/trello/rest/api-group-actions
  
 
+## Documentation
+
+within /docs an attempt of the creation of a system context, 
+container and component diagram, following the C4 model, exists for 
+the readers viewing.
+
 ## Running the App
 
 Once the all dependencies have been installed, start the Flask app in development mode within the poetry environment by running:
