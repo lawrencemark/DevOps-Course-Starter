@@ -11,7 +11,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class TestAddTask():
   def setup_method(self, method):
-    self.driver = webdriver.Chrome('/users/mark/chromedriver') 
+    self.driver = webdriver.Chrome('/usr/local/bin/chromedriver') 
     self.vars = {}
   
   def teardown_method(self, method):

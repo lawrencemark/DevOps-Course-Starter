@@ -1,0 +1,11 @@
+services:
+  development:   
+   image: todo-app:dev
+   ports:
+     - "5000:5000"
+   volumes:
+     - ./todo_app:/srv/www/
+   env_file:
+   - .env
+   
+
