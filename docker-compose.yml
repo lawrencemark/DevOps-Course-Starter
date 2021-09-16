@@ -1,5 +1,5 @@
 services:
-  development:   
+  app-dev:   
    image: todo-app:dev
    ports:
      - "5000:5000"
@@ -7,5 +7,9 @@ services:
      - ./todo_app:/srv/www/
    env_file:
    - .env
+  selenium:
+   image: selenium/standalone-chrome
+   ports:
+     - "4444:4444"
    
 

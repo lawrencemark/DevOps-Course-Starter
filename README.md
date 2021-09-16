@@ -77,29 +77,25 @@ token=yourtrellotokengoeshere
 
 To build the relevant production and development image please use the following docker commands:
 
-PRODUCTION BUILD
-================
-
+##PRODUCTION BUILD
+'''
 docker build . -t todo-app:prod --target=production
-
-DEVELOPMENT BUILD
-=================
-
+'''
+##DEVELOPMENT BUILD
+'''
 docker build . -t todo-app:dev --target=development
 
 To execute and load the container with the correct parameters please use those below:
-
-PRODUCTION RUN
-==============
-
+'''
+##PRODUCTION RUN
+'''
 docker run -d -p 5000:5000 --env-file .env todo-app:prod
-
-DEVELOPMENT RUN
-===============
-
+'''
+##DEVELOPMENT RUN
+'''
 docker run -d -p 5000:5000 --env-file .env \
 --mount type=bind,source=$(pwd)/todo_app,target=/srv/www todo-app:dev 
 
-For docker compose, please use: docker-compose up --detach
-
+For docker compose, please use: docker-compose -p DevOps up --detach
+'''
 

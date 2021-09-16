@@ -22,4 +22,5 @@ from base as development
 WORKDIR /srv/www
 COPY ./requirements.txt .
 RUN  pip3 install -r requirements.txt
-ENTRYPOINT flask run -h 0.0.0.0
+
+ENTRYPOINT ["./flaskwatch.sh"]
