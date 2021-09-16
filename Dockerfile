@@ -18,7 +18,7 @@ ENTRYPOINT gunicorn --bind 0.0.0.0:5000 app:app
 
 from base as development
 # Poetry has been substituted in the development release - giving me a 
-# giving me a headache due to my development setup (not Dockers fault)
+# headache due to my development setup (not Dockers fault)
 WORKDIR /srv/www
 COPY ./requirements.txt .
 RUN  pip3 install -r requirements.txt
