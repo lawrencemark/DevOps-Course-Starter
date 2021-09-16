@@ -5,8 +5,11 @@
 #and viewable from the host platform
 
 nohup flask run -h 0.0.0.0 > /srv/www/logs/flask.log  &  \
+cat ascii.txt & \
 watchmedo shell-command \
     --patterns="*.py;*.txt" \
     --recursive \
-    --command='pytest /srv/www/tests/test_pytest.py' \
-    > /srv/www/logs/watchmedo.log
+    --command='/srv/www/tests/testrunner.sh' > /srv/www/logs/watchmedo.log
+    
+
+
