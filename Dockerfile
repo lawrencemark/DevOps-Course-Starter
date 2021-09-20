@@ -23,7 +23,8 @@ from base as development
 COPY ./requirements.txt /srv/www
 WORKDIR /srv/www
 RUN pip install -r requirements.txt
-ENTRYPOINT ["/srv/www/todo_app/flaskwatch.sh"]
+ENTRYPOINT "ls -R"
+#ENTRYPOINT ["/srv/www/todo_app/flaskwatch.sh"]
 
 
 from base as test
