@@ -32,3 +32,12 @@ RUN pip install -r requirements.txt
 WORKDIR /srv/www/todo_app
 ENTRYPOINT ["/srv/www/todo_app/flaskrun.sh"]
 
+from  base as travis
+RUN apt-get update && apt-get install git && apt-get install nano
+WORKDIR /tmp
+RUN git clone --branch module7 https://github.com/lawrencemark/DevOps-Course-Starter
+RUN cp -R /tmp/DevOps-Course-Starter/* /srv/www
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+WORKDIR /srv/www/todo_app
+ENTRYPOINT ["./flaskrun.sh"]
