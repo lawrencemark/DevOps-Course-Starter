@@ -27,8 +27,6 @@ ENTRYPOINT ["/srv/www/todo_app/flaskwatch.sh"]
 
 
 from base as test
-RUN chmod +x /srv/www/.venv/bin/activate
-RUN /srv/www/.venv/bin/activate
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 WORKDIR /srv/www/todo_app

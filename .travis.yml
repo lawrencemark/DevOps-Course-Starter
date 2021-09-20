@@ -2,7 +2,7 @@ service:
   - docker
 
 before_install:
-- docker build . -t todo-app:test 
+- docker build . -t todo-app:test --target=test
 - docker run --name travisImage -it -p 5000:5000 --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
 - docker ps -a
 
