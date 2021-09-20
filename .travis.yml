@@ -4,10 +4,11 @@ service:
   - docker
 
 before_install:
-- docker build . -t todo-app:test --target=test
+- docker build . -t todo-app:test 
 - docker run -d -p 5000:5000 todo-app:test
+- docker ps -a
 
-before_script:
-- cd /srv/www/todo_app/tests
 script:  
-- tdd_tests.sh
+- uname
+
+
