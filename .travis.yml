@@ -6,7 +6,6 @@ service:
 before_install:
 - docker build . -t todo-app:test 
 - docker run --name travisImage -d -p 5000:5000 --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
-- docker exec -it travisImage ls
 - docker ps -a
 
 script:  
