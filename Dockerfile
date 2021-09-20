@@ -23,3 +23,15 @@ COPY ./requirements.txt /srv/www
 WORKDIR /srv/www
 RUN pip install -r requirements.txt
 ENTRYPOINT ["/srv/www/todo_app/flaskwatch.sh"]
+
+
+from base as test
+RUN apt-get update && apt-get install git
+WORKDIR /tmp
+RUN git clone https://github.com/lawrencemark/DevOps-Course-Starter
+RUN cp -R /tmp/DevOps-Course-Starter/* /srv/www
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+WORKDIR /srv/www/todo_app
+ENTRYPOINT ["flaskwatch.sh"]
+
