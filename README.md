@@ -85,6 +85,11 @@ docker build . -t todo-app:prod --target=production
 ```bash
 docker build . -t todo-app:dev --target=development
 
+```
+## TEST BUILD
+```bash
+docker build . -t todo-app:test --target=test
+
 To execute and load the container with the correct parameters please use those below:
 ```
 ## PRODUCTION RUN
@@ -99,3 +104,6 @@ docker run -d -p 5000:5000 --env-file .env \
 For docker compose, please use: docker-compose -p DevOps up --detach
 ```
 
+## TEST RUN
+```bash
+docker run -d -p 5000:5000 --env-file .env todo-app:test
