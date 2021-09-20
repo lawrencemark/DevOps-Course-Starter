@@ -3,10 +3,10 @@ service:
 
 before_install:
 - docker build . -t todo-app:travis --target=travis
-- docker run --name travisImage -it -p 5000:5000  todo-app:travis
+- docker run --name travisImage -d -p 5000:5000 -env key -env token todo-app:travis
 - docker ps -a
 
 script:  
-- docker exec -it travisImage echo 'Hello World'
+- docker exec -it travisImage pytest /srv/www/todo_app/tests/function_tests.py
 
 
