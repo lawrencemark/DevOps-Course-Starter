@@ -1,7 +1,8 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
 from markupsafe import escape
 import json, requests
-import os
+import os,sys
+sys.path.append('/srv/www/todo_app')
 from werkzeug import utils
 import requests, json
 from utils.classfunct import *
