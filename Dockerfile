@@ -29,11 +29,10 @@ ENTRYPOINT ["/srv/www/todo_app/flaskwatch.sh"]
 from base as test
 RUN apt-get update && apt-get install git && apt-get install nano
 WORKDIR /tmp
-RUN git clone https://github.com/lawrencemark/DevOps-Course-Starter
+RUN git clone --branch module7 https://github.com/lawrencemark/DevOps-Course-Starter
 RUN cp -R /tmp/DevOps-Course-Starter/* /srv/www
 COPY ./requirements.txt .
-RUN mkdir /srv/www/todo_app/logs
 RUN pip install -r requirements.txt
 WORKDIR /srv/www/todo_app
-ENTRYPOINT ["flaskrun.sh"]
+ENTRYPOINT ["./flaskrun.sh"]
 
