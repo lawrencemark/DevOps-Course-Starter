@@ -5,11 +5,10 @@ service:
 
 before_install:
 - docker build . -t todo-app:test 
-- docker run -d --name travisImage -p 5000:5000 todo-app:test
-#- docker exec -it travisImage pytest "/srv/www/todo_app/tests/function_tests.py"
+- docker run --name travisImage -d -p 5000:5000 --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
 - docker ps -a
 
 script:  
-- ls -R
+- env 
 
 
