@@ -4,8 +4,8 @@ service:
   - docker
 
 before_install:
-- docker build . -t todo-app:dev --target=development
-- docker run -d -p 5000:5000 todo-app:dev --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:dev 
+- docker build . -t todo-app:test --target=test
+- docker run -d -p 5000:5000 --env-file .env todo-app:test
 
 script:
-- /srv/www/todo_app/tests/testrunner.sh
+- pytest "/srv/www/todo_app/tests/function_tests.py
