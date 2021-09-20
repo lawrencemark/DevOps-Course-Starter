@@ -30,5 +30,5 @@ from base as test
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 WORKDIR /srv/www/todo_app
-ENTRYPOINT ["./runflask.sh"]
+ENTRYPOINT ["/srv/www/todo_app/flaskrun.sh"]
 
