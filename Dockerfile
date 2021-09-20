@@ -4,7 +4,7 @@ FROM python:3.9 as base
 EXPOSE 5000
 
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-
+RUN mkdir /srv/www
 WORKDIR /srv/www/
 ENV PATH="/root/.poetry/bin/:/srv/www/.venv/bin:/srv/www/todo_app:${PATH}" 
 
