@@ -9,6 +9,6 @@ before_install:
 - docker ps -a
 
 script:  
-- env 
+- docker exec -it travisImage echo 'Hello World'
 
 
