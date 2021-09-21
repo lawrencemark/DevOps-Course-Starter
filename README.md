@@ -100,6 +100,8 @@ docker run -d -p 5000:5000 --env-file .env todo-app:prod
 ```bash
 docker run -d --name developmentImage -p 5000:5000 --env-file .env --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:dev
 
+Instigate tests: docker exec -it developmentImage "pytest" "--disable-pytest-warnings" "/srv/www/todo_app/tests"
+
 For docker compose, please use: docker-compose -p DevOps up --detach
 ```
 
