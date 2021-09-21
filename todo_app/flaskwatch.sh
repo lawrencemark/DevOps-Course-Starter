@@ -4,7 +4,7 @@ export FLASK_APP=/srv/www/todo_app/app.py
 #followed by the execution of the watchdog process to log test status and file systen changes, which are available 
 #and viewable from the host platform
 
-nohup poetry run flask run -h 0.0.0.0 > /srv/www/todo_app/logs/flask.log  &  \
+nohup python -m flask run -h 0.0.0.0 > /srv/www/todo_app/logs/flask.log  &  \
 cat ascii.txt & \
 watchmedo shell-command \
     --patterns="*.py;*.txt" \
