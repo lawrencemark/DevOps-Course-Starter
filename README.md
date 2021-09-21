@@ -100,6 +100,7 @@ docker run -d -p 5000:5000 --env-file .env todo-app:prod
 ```bash
 docker run -d --name developmentImage -p 5000:5000 --env-file .env --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:dev
 
+
 For docker compose, please use: docker-compose -p DevOps up --detach
 ```
 
