@@ -2,7 +2,7 @@ service:
   - docker
 
 before_install:
-- docker build . -t todo-app:travis --target=travis
+- docker build . -t todo-app:test --target=test
 - docker run --name travisImage -d -p 5000:5000 -e key -e token todo-app:travis
 - docker ps -a
 

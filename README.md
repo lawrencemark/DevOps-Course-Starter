@@ -98,7 +98,7 @@ docker run -d -p 5000:5000 --env-file .env todo-app:prod
 ```
 ## DEVELOPMENT RUN
 ```bash
-docker run -d --name travisImage -p 5000:5000 --env-file .env --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
+docker run -d --name travisImage -p 5000:5000 --env-file .env --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:tdev
 
 For docker compose, please use: docker-compose -p DevOps up --detach
 ```
