@@ -85,6 +85,11 @@ docker build . -t todo-app:prod --target=production
 ```bash
 docker build . -t todo-app:dev --target=development
 
+```
+## TEST BUILD
+```bash
+docker build . -t todo-app:test --target=test
+
 To execute and load the container with the correct parameters please use those below:
 ```
 ## PRODUCTION RUN
@@ -93,9 +98,15 @@ docker run -d -p 5000:5000 --env-file .env todo-app:prod
 ```
 ## DEVELOPMENT RUN
 ```bash
-docker run -d -p 5000:5000 --env-file .env \
---mount type=bind,source=$(pwd)/todo_app,target=/srv/www todo-app:dev 
+docker run -d --name developmentImage -p 5000:5000 --env-file .env --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:dev
+
+Instigate tests: docker exec -it developmentImage "pytest" "--disable-pytest-warnings" "/srv/www/todo_app/tests"
 
 For docker compose, please use: docker-compose -p DevOps up --detach
 ```
 
+## TEST RUN
+```bash
+docker run -d --name TravisCIImage -p 5000:5000 --env-file .env --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
+
+Instigate tests: docker exec -it TravisCIImage "pytest" "--disable-pytest-warnings" "/srv/www/todo_app/tests"
