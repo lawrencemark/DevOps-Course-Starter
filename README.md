@@ -111,6 +111,6 @@ docker run -d --name TravisCIImage -p 5000:5000 --env-file .env --mount type=bin
 
 Instigate tests: docker exec -it TravisCIImage "pytest" "--disable-pytest-warnings" "/srv/www/todo_app/tests"
 
-### Travis and Heroku - Continues Delivery
+### Github actions and Heroku - Continues Delivery
 
-.Dockerfile.web has been specifically created for the deployment of the TODO application to Heroku. Based on Heroku's best practice guide, it was decided to use a separate file over that used for production, development and testing within TravisCI, especially with the introduction of multi-stage builds earlier on in the course.
+Please visit the Heroku published application using the following URI: https://stormy-tundra-71419.herokuapp.com
