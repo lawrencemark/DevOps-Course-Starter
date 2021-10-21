@@ -13,16 +13,11 @@ jobs:
    runs-on: ubuntu-latest
     steps:            
     - uses: actions/checkout@v2
-    - name: set environment variables from secrets  
-      env:
-       key: ${{ secrets.KEY }}
-       token: ${{ secrets.TOKEN }}
-       slackuripram: ${{ secrets.SLACKURIPRAM }}
-
+  
     - name: Build the test Docker image
       run: docker build . -d todo-app:test --target=test 
     - name: Start the docker image
-      run: docker run --name travisImage -d -p 5000:5000 -e key -e token --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
+      run: docker run --name travisImage -d -p 5000:5000 -e ${{ secrets.KEY }} -e ${{ secrets.TOKEN }} --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
     - name: Run some PyTests
       run: docker exec -t travisImage "pytest" -p no:warnings /srv/www/todo_app/tests
    
