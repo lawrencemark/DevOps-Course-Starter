@@ -1,0 +1,43 @@
+name: Development Build and Heroku Push
+
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ development ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.12.12 
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+        heroku_email: "marklawrence@hotmail.co.uk"
+        justlogin: true
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile.web --tag marklawrence/devops-todo:latest 
+    - name: Login to Docker Hub using secrets
+      run: echo ${{secrets.DOCKERPASSWORD}} | docker login -u ${{secrets.DOCKERUSER}} --password-stdin
+    - name: Push the Docker image to Docker Hub
+      run: docker push marklawrence/devops-todo
+    - name: Download Heroku CLI
+      run: wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+    - name: Install Heroku CLI tools
+      run:  heroku plugins:install @heroku-cli/plugin-container-registry
+
+
+    - name: Login to Herku register
+      run: docker login --username _ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
+    - name: Tag the Docker image
+      run: docker tag marklawrence/devops-todo:latest registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
+    - name: Push image to Heroku register
+      run: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+    - name: Enable Heroku application
+      run: heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
