@@ -18,6 +18,8 @@ jobs:
       run: docker build . -t todo-app:test --target=test 
     - name: Start the docker image
       run: docker run --name travisImage -d -p 5000:5000 -e key -e token --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
+    - name: sleep
+      run: sleep 10
     - name: test status of docker
       run: docker ps
    
