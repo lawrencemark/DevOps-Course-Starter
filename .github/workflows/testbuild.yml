@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:            
     - uses: actions/checkout@v2
-       with:
-         key: ${{secrets.KEY]}
-         token: ${{secrets.TOKEN}}
-         slackuripram: ${{secrets.SLACKURIPRAM} 
+      with:
+       key: ${{secrets.KEY]}
+       token: ${{secrets.TOKEN}}
+       slackuripram: ${{secrets.SLACKURIPRAM} 
 
     - name: Build the test Docker image
       run: docker build . -d todo-app:test --target=test 
