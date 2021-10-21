@@ -9,15 +9,16 @@ on:
 jobs:
 
   build:
-  env:
-   key: ${{ secrets.KEY }}
-   token: ${{ secrets.TOKEN }}
-   slackuripram: ${{ secrets.SLACKURIPRAM }}
-
-    runs-on: ubuntu-latest
+  
+   runs-on: ubuntu-latest
     steps:            
     - uses: actions/checkout@v2
-   
+    - name: set environment variables from secrets  
+      env:
+       key: ${{ secrets.KEY }}
+       token: ${{ secrets.TOKEN }}
+       slackuripram: ${{ secrets.SLACKURIPRAM }}
+
     - name: Build the test Docker image
       run: docker build . -d todo-app:test --target=test 
     - name: Start the docker image
