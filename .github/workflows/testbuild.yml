@@ -13,9 +13,9 @@ jobs:
     steps:            
     - uses: actions/checkout@v2
       with:
-       key: ${{secrets.KEY]}
-       token: ${{secrets.TOKEN}}
-       slackuripram: ${{secrets.SLACKURIPRAM} 
+       key: ${{ secrets.KEY }}
+       token: ${{ secrets.TOKEN }}
+       slackuripram: ${{ secrets.SLACKURIPRAM }}
 
     - name: Build the test Docker image
       run: docker build . -d todo-app:test --target=test 
