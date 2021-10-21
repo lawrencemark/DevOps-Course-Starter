@@ -19,5 +19,5 @@ jobs:
     - name: Start the docker image
       run: docker run --name travisImage -d -p 5000:5000 -e key -e token --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
     - name: check contents of files copied
-      run: docker exec -it travisImage /bin/ls
+      run: docker exec -t travisImage /bin/ls
    
