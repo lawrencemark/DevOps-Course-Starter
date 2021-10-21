@@ -18,4 +18,5 @@ jobs:
       run: docker build . -t todo-app:test --target=test 
     - name: Start the docker image
       run: docker run --name travisImage -d -p 5000:5000 -e key -e token --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
-        
+    - name: Run pytest
+      run: docker exec -it travisImage "pytest" -p no:warnings /srv/www/todo_app/tests
