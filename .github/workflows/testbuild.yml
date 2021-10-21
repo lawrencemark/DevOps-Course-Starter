@@ -11,10 +11,9 @@ jobs:
   build:
   
    runs-on: ubuntu-latest
-    steps:            
-    - uses: actions/checkout@v2
-  
-    - name: Build the test Docker image
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the test Docker image
       run: docker build . -d todo-app:test --target=test 
     - name: Start the docker image
       run: docker run --name travisImage -d -p 5000:5000 -e ${{ secrets.KEY }} -e ${{ secrets.TOKEN }} --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
