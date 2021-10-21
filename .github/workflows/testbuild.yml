@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ module8.1 ]
 
+env: 
+ token: ${{ secrets.TOKEN }}
+ key: ${{ secrets.KEY }}
+
 jobs:
 
   build:
@@ -14,11 +18,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set environment variables
-       env:
-        token: ${{ secrets.TOKEN }}
-        key: ${{ secrets.KEY }}
-
+       
     - name: Build the test Docker image
       run: docker build . -t todo-app:test --target=test 
     - name: Start the docker image
