@@ -14,7 +14,7 @@ jobs:
         env:
          token: ${{ secrets.TOKEN }}
          key: ${{ secrets.KEY }}
-         slackuripram: ${{ secrets.SLACKURIPRAM }}
+         
     - uses: actions/checkout@v2
     - name: Build the test Docker image
       run: docker build . -d todo-app:test --target=test 
