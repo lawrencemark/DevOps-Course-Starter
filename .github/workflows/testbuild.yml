@@ -9,6 +9,7 @@ on:
 env: 
  token: ${{ secrets.TOKEN }}
  key: ${{ secrets.KEY }}
+ slackuripram: ${{ screts.SLACKURIPRAM }}
 
 jobs:
 
