@@ -52,7 +52,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 WORKDIR /tmp
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
-#INSTALL CHROME AND DRIVER - SPECIFIC VERSION SET TO 93.0.4577.15
+#INSTALL CHROME AND DRIVER - SPECIFIC VERSION SET TO 95.0.4638.17
 RUN apt-get update && apt-get install git && apt-get install nano
 RUN apt-get update -qqy && apt-get install -qqy wget gnupg unzip
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -62,7 +62,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
   && rm /etc/apt/sources.list.d/google-chrome.list \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 # Install Chrome WebDriver
-RUN  wget --no-verbose -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip" \
+RUN  wget --no-verbose -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/95.0.4638.17/chromedriver_linux64.zip" \
 && unzip /tmp/chromedriver_linux64.zip -d /usr/bin \
   && rm /tmp/chromedriver_linux64.zip \
   && chmod 755 /usr/bin/chromedriver
