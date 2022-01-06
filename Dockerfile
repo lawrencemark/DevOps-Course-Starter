@@ -62,7 +62,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
   && rm /etc/apt/sources.list.d/google-chrome.list \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 # Install Chrome WebDriver
-RUN  wget --no-verbose -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/95.0.4638.17/chromedriver_linux64.zip" \
+RUN  wget --no-verbose -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/97.0.4692.20/chromedriver_linux64.zip" \
 && unzip /tmp/chromedriver_linux64.zip -d /usr/bin \
   && rm /tmp/chromedriver_linux64.zip \
   && chmod 755 /usr/bin/chromedriver

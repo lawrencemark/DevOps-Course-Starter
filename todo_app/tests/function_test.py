@@ -2,7 +2,7 @@
 import os,sys,inspect, pytest 
 from datetime import datetime
 sys.path.append('/srv/www/todo_app')
-import utils.classfunct 
+import backend
 
 class TestClass():
     def setup_class(self):
@@ -21,7 +21,7 @@ class TestClass():
 
     # Test function to add a card
     def test_functionalAddCard(self):
-        result = utils.classfunct.card_tasks.addcard_todo(self,'Function Test Card', 'PyTest Function Test Card')
-        assert result =="200"
+        result = backend.mongodb_addcollection('Pytest','Automatic PyTest','Completed')
+      
 
    

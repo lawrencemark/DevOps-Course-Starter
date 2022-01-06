@@ -2,7 +2,6 @@
 import os,sys,inspect, pytest 
 from datetime import datetime
 sys.path.append('/srv/www/todo_app')
-import utils.classfunct 
 
 class TestClass():
     def setup_class(self):

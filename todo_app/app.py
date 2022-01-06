@@ -1,73 +1,34 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
-from markupsafe import escape
-import json, requests
-import os,sys
-sys.path.append('/srv/www/todo_app')
-from werkzeug import utils
-import requests, json
-from utils.classfunct import *
-
-token = os.getenv('token')
-key = os.getenv('key')
-
-BOARD_ID = 'Is89akxj'
-DONE_LISTID = '6088484a9c2e634057303f6c'
-TODO_LISTID = '6088484a9c2e634057303f6a'
-DOING_LISTID = '6088484a9c2e634057303f6b'
+from flask.wrappers import Request
+from flask import Flask, render_template, redirect, url_for, request
+import backend
 
 
 app = Flask(__name__)
 
-
-taskclass = card_tasks()
-
-
-@app.route("/")
+@app.route("/",methods = ['POST', 'GET'])
 def index():
-    taskclass.get_cardsonlist(TODO_LISTID)
-    #return render_template('index.html',title='To Do List', myobjects=cardslist,someobjects=sortedbycardslist)
-    view = ViewModel.get_sortedcards()
-    return render_template('index.html',title='To Do List', myobjects=view,someobjects=cardslist)
-
-@app.route("/completed/<cardid>")
-def completed(cardid):
-    if (taskclass.update_card(cardid, DONE_LISTID)) == "200":
-        return redirect(url_for('index'))
-    else:
-        return 'Ouch - something went wrong'
-
-@app.route('/sortby', methods = ['POST'])
-def set_sorybyvalue():
     if request.method == 'POST':
-        sortedvalue = request.form['sortby']
-        taskclass.set_sortby(sortedvalue)
-        ViewModel.set_sortcards(sortedvalue)
+        taskName = request.form['tname']
+        taskDesc = request.form['tdesc']
+        taskStatus = request.form['tstatus']
+        
+        backend.mongodb_addcollection(taskName,taskDesc,taskStatus)
         return redirect(url_for('index'))
-      
-@app.route("/doing/<cardid>")
-def doing(cardid):
-    if (taskclass.update_card(cardid, DOING_LISTID)) == "200":
-        return redirect(url_for('index'))
-    else:
-        return 'Ouch - something went wrong'
 
-@app.route("/delete/<cardid>")
-def delete(cardid):
-    if (taskclass.del_card(cardid)) == "200":
-        return redirect(url_for('index'))
     else:
-        return 'Ouch - something went wrong'
-    
-@app.route('/addtask', methods = ['POST'])
-def postRequest():
+        backend.mongodb_getcollections()
+        return render_template ('index.html', results=backend.itemList)
+
+
+@app.route("/update/<itemNumber>",methods = ['POST', 'GET'])
+def update(itemNumber):
+    status = request.form['status']
     if request.method == 'POST':
-        itemAdded = request.form['addTo']
-        taskdescription = request.form['description']
-        taskclass.addcard_todo(itemAdded,taskdescription)
-        return redirect(url_for('index'))
-    else:
-        return "Something went wrong!"
+        if status == 'delete':
+            backend.mongodb_delcollection(itemNumber)
+            return redirect(url_for('index'))
+        else:
+            backend.mongodb_updatecollection(itemNumber,status)
+            return redirect(url_for('index'))
 
-
-if __name__ == "__main__":
-    app.run()
+     

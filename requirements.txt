@@ -21,3 +21,5 @@ selenium==3.141.0
 watchdog==2.1.5
 PyYAML==5.4.1
 argh==0.26.2
+pymongo==4.0.1
+dnspython==2.1.0

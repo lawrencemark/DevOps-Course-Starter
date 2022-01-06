@@ -13,6 +13,12 @@ Werkzeug = "^2.0.1"
 MarkupSafe = "^2.0.1"
 selenium = "^3.141.0"
 gunicorn = "^20.1.0"
+pymongo = "^4.0.1"
+dnspython = "^2.1.0"
+pytest = "^6.2.5"
+watchdog = "^2.1.6"
+PyYAML = "^6.0"
+argh = "^0.26.2"
 
 [tool.poetry.dev-dependencies]
 
