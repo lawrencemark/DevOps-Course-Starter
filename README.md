@@ -75,6 +75,10 @@ To keep secrets, keys and tokens secure please create a .env file within the dir
 key=yourtrellokeygoeshere
 token=yourtrellotokengoeshere
 
+Please note after module 8, Trello is no longer the main storage platform and has been replaced with MongoDB Atlas, meaning to run local please set the .env file to include:
+
+dbpassword=yourmongodatapassword
+
 To build the relevant production and development image please use the following docker commands:
 
 ## PRODUCTION BUILD
