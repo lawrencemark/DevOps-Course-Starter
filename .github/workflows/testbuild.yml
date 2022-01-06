@@ -2,13 +2,12 @@ name: Test Build
 
 on:
   push:
-    branches: [ module8.1 ]
+    branches: [ module9 ]
   pull_request:
-    branches: [ module8.1 ]
+    branches: [ module9 ]
 
 env: 
- token: ${{ secrets.TOKEN }}
- key: ${{ secrets.KEY }}
+ dbpassword: ${{ secrets.DBPASSWORD }}
  slackuripram: ${{ secrets.SLACKURIPRAM }}
 
 jobs:
