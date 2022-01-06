@@ -22,7 +22,7 @@ jobs:
     - name: Build the test Docker image
       run: docker build . -t todo-app:test --target=test 
     - name: Start the docker image
-      run: docker run --name travisImage -d -p 5000:5000 -e key -e token --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
+      run: docker run --name githubactionsImage -d -p 5000:5000 -e dbpassword --mount type=bind,source=$(pwd)/,target=/srv/www todo-app:test
     - name: Run some PyTests
-      run: docker exec -t travisImage "pytest" -p no:warnings /srv/www/todo_app/tests
+      run: docker exec -t githubactionsImage "pytest" -p no:warnings /srv/www/todo_app/tests
    
