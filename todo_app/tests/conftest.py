@@ -3,11 +3,11 @@ import os,sys
 import requests
 import json
 sys.path.append('/srv/www/todo_app')
-from app import app as flask_app
 
-token = os.getenv('token')
-key = os.getenv('key')
-slackurlpram = os.getenv('slackuripram')
+slackurlpram = '0000'
+
+
+from app import app as flask_app
 
 @pytest.fixture
 def app():
@@ -48,7 +48,7 @@ def sendRequestToSlack(slack_data):
     headers={'Content-Type': 'application/json'}
     )
 
-    if response.status_code != 200:
+    if response.status_code != 302:
         raise ValueError(
             'Request to slack returned an error %s, the response is:\n%s'
             % (response.status_code, response.text)
@@ -64,7 +64,7 @@ def pytest_sessionfinish(session, exitstatus):
     elif exitstatus > 1:
         message = "An unexpected pytest operation was encountered during execution"
            
-    slack_data = {'text': message}
+    """slack_data = {'text': message}
     
-    sendRequestToSlack(slack_data)
+    sendRequestToSlack(slack_data)"""
 

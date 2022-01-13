@@ -25,7 +25,7 @@ textarea {
 }
 input[type=submit] {
   width: 35%;
-  background-color: #4CAF50;
+  background-color: gray;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -70,7 +70,6 @@ div {
   color: white;
 }
 
-
 #div2 {
   color: white;
   background-color: #45a049;
@@ -81,10 +80,21 @@ div {
 </style>
 <title>DevOps ToDo List Application</title>
 <body>
+    
+  </div>
     <div id="div2">
-        <p><b>DevOps To Do List Application</b></p>
-    </div>
-<div>
+      <table style="width:100%">
+        <tr>     
+          <th><p3>Welcome GitHub User: {{ githubuser }} </p3></th>
+          <th><a href="/logoutuser"> Logout of GitHub and Application</a></th>
+        </tr>
+       </table>  
+    
+        <p><b><u>DevOps To Do List Application</u></b></p>
+   </div>
+
+
+   <div>
     
     <form action="/" method="POST">
     <label for="tname">Task Name:</label><br>

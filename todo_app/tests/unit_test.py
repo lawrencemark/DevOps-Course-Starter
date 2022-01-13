@@ -21,5 +21,5 @@ class TestClass():
     # Test function to add a card
     def test_unittestWebServer(self,app, client):
         result = client.get('/')
-        assert result.status_code == 200
+        assert result.status_code == 302
    

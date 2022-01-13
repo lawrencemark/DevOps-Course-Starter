@@ -1,7 +1,7 @@
 import os
 import certifi
 import pymongo
-import app
+import data
 from pymongo import MongoClient
 
 dbpassword = os.environ['dbpassword']
