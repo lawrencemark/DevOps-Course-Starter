@@ -11,7 +11,7 @@ env:
  slackuripram: ${{ secrets.SLACKURIPRAM }}
  oauthlib_insecure_transport: ${{ secrets.oauthlib_insecure_transport }}
  oauth_id: ${{ secrets.oauth_id }}
- oauth_secret ${{ secrets.oauth_secret }}
+ oauth_secret: ${{ secrets.oauth_secret }}
 
 jobs:
 
