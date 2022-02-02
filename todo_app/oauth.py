@@ -12,8 +12,8 @@ from models import db, OAuth, User
 
 
 github_blueprint = make_github_blueprint(
-    client_id=os.getenv("GITHUB_ID"),
-    client_secret=os.getenv("GITHUB_SECRET"),
+    client_id=os.getenv("OAUTH_ID"),
+    client_secret=os.getenv("OAUTH_SECRET"),
     storage=SQLAlchemyStorage(
         OAuth,
         db.session,

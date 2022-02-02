@@ -38,7 +38,8 @@ def index():
 
     else:
         backend.mongodb_getcollections()
-        return render_template ('index.html', results=backend.itemList, githubuser=login())
+        usernameRights = login()
+        return render_template ('index.html', results=backend.itemList, githubuser=usernameRights[0], rights=usernameRights[1])
     
 
 @app.route("/update/<itemNumber>",methods = ['POST', 'GET'])
@@ -57,11 +58,15 @@ def update(itemNumber):
 
 @app.route("/github")
 def login():
+    accessRights = 'ro'
     if not github.authorized:
         return redirect(url_for("github.login"))
     res = github.get("/user")
     username = res.json()["login"]
-    return username
+    if username == 'lawrencemark':
+        accessRights = 'rw'
+    
+    return username, accessRights
 
 @app.route("/logoutuser")
 def logout():

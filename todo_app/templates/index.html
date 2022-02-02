@@ -85,8 +85,9 @@ div {
     <div id="div2">
       <table style="width:100%">
         <tr>     
-          <th><p3>Welcome GitHub User: {{ githubuser }} </p3></th>
+          <th><p3>Welcome GitHub User: {{ githubuser }} accessing platform with {{ rights }} rights </p3></th>
           <th><a href="/logoutuser"> Logout of GitHub and Application</a></th>
+          
         </tr>
        </table>  
     
@@ -96,20 +97,23 @@ div {
 
    <div>
     
-    <form action="/" method="POST">
-    <label for="tname">Task Name:</label><br>
-    <input type="text" id="tname" name="tname"></br>
-    <label for="tname">Task Description:</label><br>
-    <textarea id="tdesc" name="tdesc" rows="4" cols="50"></textarea></br>
-    <label for="Status">Choose a Status:</label></br>
-    <select class="dropdown" id="tstatus" name="tstatus">
-    <option value="Not Started">Not Started</option>
-    <option value="Work in Progress">Work in Progress</option>
-    <option value="Completed">Completed</option>
-    <option value="Other">Other</option>
-    </select></br>
-    <input type="submit" value="Submit">
-    </form>
+    {% if rights == 'rw' %}
+      
+      <form action="/" method="POST">
+      <label for="tname">Task Name:</label><br>
+      <input type="text" id="tname" name="tname"></br>
+      <label for="tname">Task Description:</label><br>
+      <textarea id="tdesc" name="tdesc" rows="4" cols="50"></textarea></br>
+      <label for="Status">Choose a Status:</label></br>
+      <select class="dropdown" id="tstatus" name="tstatus">
+      <option value="Not Started">Not Started</option>
+      <option value="Work in Progress">Work in Progress</option>
+      <option value="Completed">Completed</option>
+      <option value="Other">Other</option>
+      </select></br>
+      <input type="submit" value="Submit">
+      </form>
+    {% endif %}
 </div>
 <div>
 <p Current Items Consist Of:</p>
@@ -130,18 +134,19 @@ div {
         <td>{{ i['Status'] }}</td>
         </tr>
    
-        
+        {% if rights == 'rw' %}
+
         <p>Please update your task accordingly:</p>
 
-        <form action="/update/{{ i['Item_number'] }}" method="POST">
-          <label for="workinprogress">Work in Progress</label>
-          <input type="radio" id="workinprogress" name="status" value="Work in Progress">
-          <label for="completed">Completed</label>
-          <input type="radio" id="completed" name="status" value="Completed">
-          <label for="delete">Delete</label>
-          <input type="radio" id="delete" name="status" value="delete"></br>
-          <input type="submit" value="Submit">
-          
+          <form action="/update/{{ i['Item_number'] }}" method="POST">
+            <label for="workinprogress">Work in Progress</label>
+            <input type="radio" id="workinprogress" name="status" value="Work in Progress">
+            <label for="completed">Completed</label>
+            <input type="radio" id="completed" name="status" value="Completed">
+            <label for="delete">Delete</label>
+            <input type="radio" id="delete" name="status" value="delete"></br>
+            <input type="submit" value="Submit">
+          {% endif %}
         </form> 
         
 
